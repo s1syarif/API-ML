@@ -4,7 +4,7 @@ ML2 adalah modul mandiri yang berisi API dan utilitas untuk berbagai kebutuhan m
 
 ## Struktur Folder
 
-- `ml_main.py` / `recog.py` : Entry point FastAPI untuk seluruh API ML2 (OCR, rekomendasi, dsb)
+- `ml_main.py` : Entry point FastAPI untuk seluruh API ML2 (OCR, rekomendasi, dsb)
 - `model/`   : Semua file model, scaler, weights, dan mapping
     - `OCR/`      : Model & mapping untuk OCR (misal: `char_to_num.json`, `recognizer_finetuned_weights.h5`)
     - `dieses/`   : Model & scaler untuk prediksi penyakit (misal: `best_multilabel_keras_model.keras`)
@@ -17,8 +17,6 @@ ML2 adalah modul mandiri yang berisi API dan utilitas untuk berbagai kebutuhan m
 1. Pastikan semua dependensi sudah terinstall (lihat requirements di project utama).
 2. Jalankan API ML2 dengan FastAPI/uvicorn:
    ```
-   uvicorn ML2.recog:app --reload
-   # atau jika menggunakan ml_main.py
    uvicorn ML2.ml_main:app --reload
    ```
 3. Endpoint utama:
@@ -31,7 +29,6 @@ ML2 adalah modul mandiri yang berisi API dan utilitas untuk berbagai kebutuhan m
 - Semua model dan mapping harus ada di folder `model/`.
 - Semua fungsi utilitas ada di `utils/`.
 - Hapus file lama/duplikat/deprecated di luar struktur ini.
-- Untuk pengembangan lebih lanjut, tambahkan unit test di folder `tests/` (opsional).
 
 ---
 
