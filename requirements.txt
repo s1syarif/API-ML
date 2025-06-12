@@ -1,0 +1,10 @@
+fastapi==0.115.12
+uvicorn==0.34.3
+numpy==1.24.3
+pandas==2.3.0
+tensorflow==2.13.0
+keras==2.13.1
+keras-ocr==0.9.3
+Pillow==11.2.1
+joblib==1.5.1
+scikit-learn==1.7.0

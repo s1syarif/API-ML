@@ -1,1 +1,24 @@
+# Python cache
 __pycache__/
+*.py[cod]
+*.pyo
+
+# Model files (optional, hapus jika ingin di-track)
+*.h5
+*.keras
+*.joblib
+*.pkl
+
+# Editor/OS files
+.vscode/
+.DS_Store
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environment
+venv/
+env/
+
+# Private keys (optional, hapus jika ingin di-track)
+*.pem
