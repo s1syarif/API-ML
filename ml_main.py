@@ -29,7 +29,7 @@ if PARENT_DIR not in sys.path:
 sys.path.append('.')
 
 # === Import Local Modules ===
-from ML2.utils.ocr_utils import crop_and_predict_words, extract_nutrition_json
+from ML2.utils.ocr_utils import decode_prediction, crop_and_predict_words, extract_nutrition_json
 from ML2.utils.rekomendasi_utils import rekomendasi_logic
 from ML2.utils.health_score_utils import infer_health_score_custom
 from ML2.utils.disease_predict_utils import preprocess_new_data
@@ -90,6 +90,8 @@ async def ocr_from_image(file: UploadFile = File(...)):
 @app.post('/recommend')
 def rekomendasi_gizi(data: KonsumsiRequest):
     print("[API CALL] /recommend endpoint dipanggil", flush=True)
+    print("[DEBUG] Data request yang diterima:")
+    print(json.dumps(data.dict(), indent=2, ensure_ascii=False))
     try:
         target_harian = data.target_harian
         konsumsi = data.konsumsi
@@ -185,7 +187,19 @@ def predict_api(req: PredictRequest):
         proba = model.predict(X_new)
         y_pred = (proba > 0.5).astype(int)
         labels = mlb.inverse_transform(y_pred)
-        print("Label terprediksi:", [list(l) if l else ['Normal'] for l in labels])
-        return {"labels": [list(l) if l else ['Normal'] for l in labels]}
+        # Hapus print label dan probabilitas
+        # Format output hanya label terprediksi dan probabilitasnya
+        result = []
+        for i, label_list in enumerate(labels):
+            for idx, label in enumerate(label_list):
+                # Cari index label di mlb.classes_
+                if label in mlb.classes_:
+                    label_idx = list(mlb.classes_).index(label)
+                    prob = proba[i][label_idx]
+                    result.append({"Label terprediksi": label, "probabilitas": float(round(prob*1, 2))})
+            # Jika tidak ada label terprediksi, tampilkan Normal
+            if not label_list:
+                result.append({"Label terprediksi": "Normal", "probabilitas": float(round(1.0*1, 2))})
+        return {"hasil": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f'❌ Terjadi kesalahan: {e}')
