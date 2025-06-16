@@ -22,3 +22,5 @@ env/
 
 # Private keys (optional, hapus jika ingin di-track)
 *.pem
+
+Dockerfile
