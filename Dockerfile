@@ -20,4 +20,4 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Jalankan FastAPI app
-CMD ["uvicorn", "ML2.ml_main:app", "--host", "0.0.0.0", "--port", "10000"]
+CMD ["uvicorn", "ML2.ml_main:app", "--host", "0.0.0.0", "--port", "9000"]
