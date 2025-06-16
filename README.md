@@ -29,7 +29,3 @@ ML2 adalah modul mandiri yang berisi API dan utilitas untuk berbagai kebutuhan m
 - Semua model dan mapping harus ada di folder `model/`.
 - Semua fungsi utilitas ada di `utils/`.
 - Hapus file lama/duplikat/deprecated di luar struktur ini.
-
----
-
-**Struktur folder sudah rapi dan siap dikembangkan lebih lanjut!**

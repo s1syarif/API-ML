@@ -200,6 +200,7 @@ def predict_api(req: PredictRequest):
             # Jika tidak ada label terprediksi, tampilkan Normal
             if not label_list:
                 result.append({"Label terprediksi": "Normal", "probabilitas": float(round(1.0*1, 2))})
+        print("Hasil prediksi penyakit:", result)
         return {"hasil": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f'❌ Terjadi kesalahan: {e}')
